@@ -319,10 +319,50 @@ def create_simple_list():
 ################################################################
 
 ################################################################
-def test_find_methods():
+def search(head, find_me):
+    """
+    Searches for a value in the list
+
+    Args:
+        head (Node)      - head node for the list that is to be searched
+        find_me (object) - the value that is to be searched for
+
+    Return:
+        bool - True if found, False if not
+    """
+    #create pointer
+    ptr = head
+    #test for edge cases
+    #if none
+    if ptr == None:
+        return False
+    #if head node with empty list
+    if ptr.value == None and ptr.next == None:
+        return False
+    #if head node with nonempty list
+    if ptr.value == None and ptr.next != None:
+        #increment pointer
+        ptr = ptr.next
+    #go thru list
+    while ptr != None:
+        if ptr.value == find_me:
+            return True
+        #increment pointer
+        ptr = ptr.next
+    #end while
+    return False
+################################################################
+
+################################################################
+def test_search_methods():
     #create linked list
     node = create_simple_list()
     #print list
     print_with_index(node)
+    #test search()
+    find_me = raw_input('Enter a string to search for: ')
+    if search(node, find_me):
+        print '* found'
+    else: print '* not found'
 ################################################################
 test_find_methods()
