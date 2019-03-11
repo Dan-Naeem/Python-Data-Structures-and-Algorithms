@@ -160,6 +160,73 @@ def add_at_end(head, node_to_add):
 ################################################################
 
 ################################################################
+def add_at_index(head, index_to_add, node_to_add):
+    """
+    Adds a node at a specified index in a list
+
+    Args:
+        head (Node)         - head node that points to the list
+        index_to_add (int)  - the desired index where teh node is to be added
+        not_to_add (Node)   - the node to be added
+
+    Expectations:
+        index_to_add should be within range, no out of index error is returned
+
+    Return:
+        node that points to the head of the list
+    """
+
+    #create pointer
+    ptr = head
+    #test for edge cases
+    #if at head == None
+    if ptr == None:
+        return head
+    #if index_to_add < 0:
+    if index_to_add < 0:
+        return head
+    #if index_to_add == 0
+    if index_to_add == 0:
+        #if there's a head node (both empty and nonempty)
+        if head.value == None:
+            #point node_to_add at first node
+            node_to_add.next = head.next
+            #point head node at node_to_add
+            head.next = node_to_add
+            #return head node
+            return head
+        else:
+            #point node_to_add at head
+            node_to_add.next = head
+            #return new head
+            return node_to_add
+    #check for head node (w/ both empty and nonempty lists)
+    if head.value == None:
+        #move to next node
+        ptr = node.next
+    #now ptr should be on the first node, @index == 0
+    #go thru list
+    next_index = 0
+    while ptr != None:
+        #increment next_index
+        next_index += 1
+        #if the next index is the desired index, break
+        if next_index == index_to_add:
+            break
+        #increment pointer
+        ptr = ptr.next
+    #end while
+    #check to see if the next index is the appropriate
+    #if exitted while loop before arriving at correct index, dont add node
+    if next_index == index_to_add:
+        #point node_to_add at next node
+        node_to_add.next = ptr.next
+        #point current node at node_to_add
+        ptr.next = node_to_add
+    return head
+################################################################
+
+################################################################
 def test_add_node_to_list():
     """Tests funcitonality of adding a node to a linked list."""
 
@@ -174,24 +241,23 @@ def test_add_node_to_list():
     n2.next = n3
     n3.next = n4
     n4.next = n5
-    #print list
-    print_list_iterative(n1)
-    print_with_index(n1)
     # add a new node to the end of the list
-    newNode = Node(raw_input('Enter a value to be added to list: '))
-    add_at_end(n1, newNode)
-    #print list again
-    print '*** after add_at_end()'
-    print_list_iterative(n1)
-    #print list with indices
-    print 'testing print with index'
+    add_at_end(n1, Node('Fox'))
+    #print list with index
+    print_with_index(n1)
+    #test add_at_index()
+    print '*** testing add_at_index()'
+    index = int(raw_input("Choose an index: "))
+    value = '<<< should be %d' % (index)
+    test_node = Node(value)
+    n1 = add_at_index(n1, index, test_node)
     print_with_index(n1)
 ################################################################
-#test_add_node_to_list()
+test_add_node_to_list()
 
 ################################################################
 def test_edge_cases():
-    """Testing for appropriaate behavior for edge cases"""
+    """Testing for appropriate behavior for edge cases"""
 
     #case 1: None
     print '*** testing case 1: None'
@@ -227,4 +293,3 @@ def test_edge_cases():
     print_list_backwards(head.next)
     print_with_index(head.next)
 ################################################################
-test_edge_cases()
