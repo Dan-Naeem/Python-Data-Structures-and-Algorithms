@@ -29,6 +29,27 @@ def print_list_iterative(node):
 ################################################################
 
 ################################################################
+def print_list_recursive(node):
+    """Print a Singly Linked List using recursion"""
+
+    #if at end of list
+    if node == None:
+        return
+    #if at head node with empty list
+    elif node.value == None and node.next == None:
+        return
+    #if at head none with nonempty list
+    elif node.value == None and node.next != None:
+        #recursive call on next node
+        print_list_recursive(node.next)
+    #if at a node within list
+    else:
+        #print, recusrive call on next node
+        print node.value
+        print_list_recursive(node.next)
+################################################################
+
+################################################################
 def create_linked_list():
     """Creates a linked list with user input."""
 
@@ -43,5 +64,7 @@ def create_linked_list():
     #print list
     print 'print list iter'
     print_list_iterative(l1)
+    print 'print list recur'
+    print_list_recursive(l1)
 ################################################################
 create_linked_list()
