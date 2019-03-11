@@ -89,4 +89,63 @@ def create_linked_list():
     print 'print list backwards'
     print_list_backwards(l1)
 ################################################################
-create_linked_list()
+
+################################################################
+def add_at_end(head, node_to_add):
+    """
+    Adds a node to the end of the list
+
+    Param
+    -----
+        Expects a pointer to the head of the list and the node to be added
+
+    Return
+    ------
+        Returns a pointer to the head of the list
+    """
+
+    #create pointer
+    ptr = head
+    #check if at none
+    if ptr == None:
+        return
+    #check if at head node with empty list
+    if ptr.value == None and ptr.next == None:
+        return
+    #check if at head node with nonempty list
+    if ptr.value == None and ptr.next != None:
+        #increment pointer
+        ptr = ptr.next
+    #go thru list, while not at the last node
+    while ptr.next != None:
+        ptr = ptr.next
+    #at last node
+    ptr.next = node_to_add
+    return head
+################################################################
+
+################################################################
+def test_add_node_to_list():
+    """Tests funcitonality of adding a node to a linked list"""
+
+    #create nodes
+    n1 = Node('Alpha')
+    n2 = Node('Bravo')
+    n3 = Node('Charlie')
+    n4 = Node('Delta')
+    n5 = Node('Echo')
+    #link them
+    n1.next = n2
+    n2.next = n3
+    n3.next = n4
+    n4.next = n5
+    #print list
+    print_list_iterative(n1)
+    # add a new node to the end of the list
+    newNode = Node(raw_input('Enter a value to be added to list: '))
+    add_at_end(n1, newNode)
+    #print list again
+    print '*after add_at_end()'
+    print_list_iterative(n1)
+################################################################
+test_add_node_to_list()
