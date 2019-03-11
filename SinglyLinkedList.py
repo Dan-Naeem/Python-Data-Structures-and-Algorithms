@@ -187,4 +187,44 @@ def test_add_node_to_list():
     print 'testing print with index'
     print_with_index(n1)
 ################################################################
-test_add_node_to_list()
+#test_add_node_to_list()
+
+################################################################
+def test_edge_cases():
+    """Testing for appropriaate behavior for edge cases"""
+
+    #case 1: None
+    print '*** testing case 1: None'
+    case1 = None
+    print_list_iterative(case1)
+    print_list_recursive(case1)
+    print_list_backwards(case1)
+    print_with_index(case1)
+
+    #case 2: head node with empty list
+    print '*** testing for case 2: head w/ empty list'
+    head = Node()
+    print_list_iterative(head)
+    print_list_recursive(head)
+    print_list_backwards(head)
+    print_with_index(head)
+
+    '''cases 3 and 4 are expected'''
+
+    #case 3: head node with nonempty list
+    print '*** testing for case 3: head node w/ nonempty list'
+    head.next = Node('nonempty1')
+    head.next.next = Node('nonempty2')
+    print_list_iterative(head)
+    print_list_recursive(head)
+    print_list_backwards(head)
+    print_with_index(head)
+
+    #case 4: first node in list
+    print '*** testing for case 4: first node in list'
+    print_list_iterative(head.next)
+    print_list_recursive(head.next)
+    print_list_backwards(head.next)
+    print_with_index(head.next)
+################################################################
+test_edge_cases()
