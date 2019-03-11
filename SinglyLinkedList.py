@@ -253,10 +253,9 @@ def test_add_node_to_list():
     n1 = add_at_index(n1, index, test_node)
     print_with_index(n1)
 ################################################################
-test_add_node_to_list()
 
 ################################################################
-def test_edge_cases():
+def test_print_edge_cases():
     """Testing for appropriate behavior for edge cases"""
 
     #case 1: None
@@ -293,3 +292,37 @@ def test_edge_cases():
     print_list_backwards(head.next)
     print_with_index(head.next)
 ################################################################
+
+################################################################
+def create_simple_list():
+    """"
+    Creates a Simple Linked List
+
+    Args:
+        n/a
+
+    Return:
+        returns first node in the linked list
+    """
+
+    n1 = Node('Alpha')
+    n2 = Node('Bravo')
+    n3 = Node('Charlie')
+    n4 = Node('Delta')
+    n5 = Node('Echo')
+    n1.next = n2
+    n2.next = n3
+    n3.next = n4
+    n4.next = n5
+
+    return n1
+################################################################
+
+################################################################
+def test_find_methods():
+    #create linked list
+    node = create_simple_list()
+    #print list
+    print_with_index(node)
+################################################################
+test_find_methods()
