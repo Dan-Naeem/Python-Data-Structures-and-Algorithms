@@ -321,7 +321,7 @@ def create_simple_list():
 ################################################################
 def search(head, find_me):
     """
-    Searches for a value in the list
+    Searches for a value in the list.
 
     Args:
         head (Node)      - head node for the list that is to be searched
@@ -354,15 +354,53 @@ def search(head, find_me):
 ################################################################
 
 ################################################################
+def search_and_replace(head, find_me, replace_with):
+    """
+    Search for a value and replaces it with another
+
+    Args:
+        find_me (object)      - the value to be replaced
+        replace_with (object) - the value that replaces
+
+    Return:
+        Node that points to the head of the list
+    """
+
+    #create a pointer
+    ptr = head
+    #test for edge cases
+    #if None
+    if ptr == None:
+        return head
+    #if head with empty list
+    if ptr.value == None and ptr.next == None:
+        return head
+    #if head node with nonempty list
+    if ptr.value == None and ptr.next != None:
+        ptr = ptr.next
+    #go thru list
+    while ptr != None:
+        #look for match
+        if ptr.value == find_me:
+            #replace value
+            ptr.value = replace_with
+            break
+        #increment ptr
+        ptr = ptr.next
+    #end while
+    return head
+################################################################
+
+################################################################
 def test_search_methods():
     #create linked list
     node = create_simple_list()
     #print list
     print_with_index(node)
-    #test search()
-    find_me = raw_input('Enter a string to search for: ')
-    if search(node, find_me):
-        print '* found'
-    else: print '* not found'
+    #test search_and_edit()
+    find_me = raw_input('search for: ')
+    replace_with = raw_input('replace with: ')
+    search_and_replace(node, find_me, replace_with)
+    print_with_index(node)
 ################################################################
-test_find_methods()
+test_search_methods()
