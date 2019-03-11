@@ -29,6 +29,41 @@ def print_list_iterative(node):
 ################################################################
 
 ################################################################
+def print_with_index(node):
+    """
+    Print all items in a linked list alongside the index.
+
+    Param
+    -----
+        Expects a pointer to the head of the list
+
+    Return
+    ------
+        Returns nothing
+    """
+
+    #create a pointer
+    ptr = node
+    #test for exit conditions
+    #if at end of list (None)
+    if ptr == None:
+        return
+    #if at head node with empty list
+    if ptr.value == None and ptr.next == None:
+        return
+    #if at head node with nonempty list
+    if ptr.value == None and ptr.next != None:
+        ptr = ptr.next
+    #create counter, go thru list
+    counter = 0
+    while ptr != None:
+        print counter, ptr.value
+        #increment counter and pointer
+        counter += 1
+        ptr = ptr.next
+################################################################
+
+################################################################
 def print_list_recursive(node):
     """Print a Singly Linked List using recursion."""
 
@@ -93,7 +128,7 @@ def create_linked_list():
 ################################################################
 def add_at_end(head, node_to_add):
     """
-    Adds a node to the end of the list
+    Adds a node to the end of the list.
 
     Param
     -----
@@ -126,7 +161,7 @@ def add_at_end(head, node_to_add):
 
 ################################################################
 def test_add_node_to_list():
-    """Tests funcitonality of adding a node to a linked list"""
+    """Tests funcitonality of adding a node to a linked list."""
 
     #create nodes
     n1 = Node('Alpha')
@@ -141,11 +176,15 @@ def test_add_node_to_list():
     n4.next = n5
     #print list
     print_list_iterative(n1)
+    print_with_index(n1)
     # add a new node to the end of the list
     newNode = Node(raw_input('Enter a value to be added to list: '))
     add_at_end(n1, newNode)
     #print list again
-    print '*after add_at_end()'
+    print '*** after add_at_end()'
     print_list_iterative(n1)
+    #print list with indices
+    print 'testing print with index'
+    print_with_index(n1)
 ################################################################
 test_add_node_to_list()
