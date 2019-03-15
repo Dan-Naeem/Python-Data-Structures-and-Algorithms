@@ -478,16 +478,92 @@ def delete_by_value(head, value_to_delete):
 ################################################################
 
 ################################################################
+def delete_by_index(head, delete_index):
+    """
+    Deletes a node at the specified index from the list.
+
+    Args:
+        delete_index (int) - specefied index
+
+    Return:
+        Node that points to the head of the list
+    """
+
+    #create a pointer
+    ptr = head
+    #check for edge cases
+    #if delete_index < 0
+    if delete_index < 0:
+        return head
+    #if head is none
+    if ptr == None:
+        return head
+    #if at head pointer with empty list
+    if ptr.value == None and ptr.next == None:
+        return head
+    #SPECIAL CASE: delete_index == 0
+    if delete_index == 0:
+        #head node with nonempty list
+        if ptr.value == None and ptr.next != None:
+            #point temp at first node
+            temp = ptr.next
+            #point head node at second node
+            ptr.next = ptr.next.next
+            #delete temp node
+            temp = None
+            #return head node
+            return ptr
+        #else at first node in the list
+        else:
+            #point temp at first node
+            temp = ptr
+            #move pointer to second node
+            ptr = ptr.next
+            #delete temp
+            temp = None
+            #return pointer
+            return ptr
+    #end SPECIAL CASE: delete_index == 0
+    #if at head node with non empty list, move pointer to first node
+    if ptr.value == None and ptr.next != None:
+        ptr = ptr.next
+    #now ptr is at the first node in the list
+    #create a pointer to keep track of the previous node
+    prev = None
+    index = 0
+    #go thru list
+    while ptr != None:
+        #if index == delete_index, delete current node
+        if index == delete_index:
+            #make prev node point at next node
+            prev.next = ptr.next
+            #delete current node
+            ptr = None
+            #return head
+            return head
+        #increment both pointers and index
+        prev = ptr
+        ptr = ptr.next
+        index += 1
+    #after exitting while loop, match wast found
+    print '** no match found'
+    return head
+################################################################
+
+################################################################
 def test_delete_methods():
     print 'test delete methods'
     #create linked list
-    l1 = create_simple_list()
+    derp = create_simple_list()
+    l1 = Node()
+    l1.next = derp
     #print list
     print_with_index(l1)
-    #test delete_by_value
-    delete_value = raw_input("enter value to delete: ")
-    l1 = delete_by_value(l1, delete_value)
-    #print after deletion
-    print_with_index(l1)
+    for i in range(5):
+        #test delete_by_value
+        delete_index = int(raw_input("enter index of node to delete: "))
+        l1 = delete_by_index(l1, delete_index)
+        #print after deletion
+        print_with_index(l1)
 ################################################################
 test_delete_methods()
