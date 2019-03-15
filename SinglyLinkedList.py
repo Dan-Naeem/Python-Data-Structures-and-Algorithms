@@ -403,4 +403,91 @@ def test_search_methods():
     search_and_replace(node, find_me, replace_with)
     print_with_index(node)
 ################################################################
-test_search_methods()
+
+################################################################
+def delete_by_value(head, value_to_delete):
+    """
+    Searches for a value and deletes corresponding node.
+
+    Args:
+        value_to_delete (object) - target value
+
+    Return:
+        Node that points to the head of the list
+    """
+
+    #create pointer
+    ptr = head
+    #check for edge cases
+    #if ptr == None
+    if ptr == None:
+        return head
+    #if at head node with empty lists
+    if ptr.value == None and ptr.next == None:
+        return head
+    #SPECIAL CASE: FIRST NODE MATCH
+    #first node match, with head node
+    if ptr.value == None and ptr.next != None:
+        #check if first node matches
+        if ptr.next.value == value_to_delete:
+            #create temp ptr
+            temp = ptr.next
+            #point head node at next node
+            ptr.next = ptr.next.next
+            #del temp node
+            temp = None
+            #return head
+            return head
+        #else move pointer onto first node
+        else:
+            ptr = ptr.next
+    #first node match, w/o head node
+    else:
+        #check if first node matches
+        if ptr.value == value_to_delete:
+            #point temp at node to delete
+            temp = ptr
+            #make current point at next node
+            ptr = ptr.next
+            #delete temp node
+            temp = None
+            #return head
+            return ptr
+    #end SPECIAL CASE: FIRST NODE MATCH
+    #now with the pointer at the first node, go thru list
+    while ptr != None:
+        #check if next node exists
+        if ptr.next != None:
+            #if next node matches, delete next node
+            if ptr.next.value == value_to_delete:
+                #point temp at next node
+                temp = ptr.next
+                #make current node skip over next node
+                ptr.next = ptr.next.next
+                #delete next node
+                temp = None
+                #return head
+                return head
+            #end if
+        #end if
+        #increment pointer
+        ptr = ptr.next
+    #end while
+    #if the program reached this point, match wasnt found
+    return head
+################################################################
+
+################################################################
+def test_delete_methods():
+    print 'test delete methods'
+    #create linked list
+    l1 = create_simple_list()
+    #print list
+    print_with_index(l1)
+    #test delete_by_value
+    delete_value = raw_input("enter value to delete: ")
+    l1 = delete_by_value(l1, delete_value)
+    #print after deletion
+    print_with_index(l1)
+################################################################
+test_delete_methods()
