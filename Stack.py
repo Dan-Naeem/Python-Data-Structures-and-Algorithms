@@ -36,33 +36,3 @@ class Stack(object):
     def get_items(self):
         return self.items
 #end Stack
-
-s = Stack()
-print '* print empty stack'
-s.print_stack()
-print 'lenth:', s.get_length()
-print 'top item:', s.peek()
-
-s.push('alpha')
-s.push('bravo')
-s.push('charlie')
-s.push(5)
-s.push(6)
-s.print_stack()
-print 'lenth:', s.get_length()
-print 'top item:', s.peek()
-
-s.pop()
-print '* after pop'
-s.print_stack()
-print 'lenth:', s.get_length()
-print 'top item:', s.peek()
-
-s.pop()
-print '* after pop'
-s.print_stack()
-print 'lenth:', s.get_length()
-print 'top item:', s.peek()
-
-all = s.get_items()
-print all
