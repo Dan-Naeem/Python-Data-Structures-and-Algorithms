@@ -19,60 +19,60 @@ class BinarySearchTree(object):
             return False
 
     def insert(self, value):
-        # create a new node
-        node_to_insert = Node(value)
         # if empty, point root at new node
         if self.is_empty():
-            self.root = node_to_insert
+            self.root = Node(value)
         # else find place to insert
         else:
-            # create pointer at root
-            ptr = self.root
-            # go thru tree
-            while True:
-                # if value is greater, check right child
-                if value > ptr.value:
-                    # if empty, insert
-                    if ptr.right_child == None:
-                        ptr.right_child = node_to_insert
-                        return
-                    # else traverse right subtree
-                    ptr = ptr.right_child
-                # elif value is less, check left child
-                elif value < ptr.value:
-                    # if empty, insert
-                    if ptr.left_child == None:
-                        ptr.left_child = node_to_insert
-                        return
-                    # else traverse left subtree
-                    ptr = ptr.left_child
-                # end if/else
-            # end while
-        # end if/else
+            # call recursive insert function on root
+            self.__insert(value, self.root)
     # end def insert()
 
+    def __insert(self, value, ptr):
+        """Helper insert function, recursive."""
+        # if greater, check right
+        if value > ptr.value:
+            # if right is None, insert
+            if ptr.right_child == None:
+                ptr.right_child = Node(value)
+            # else recursive call on right child
+            else:
+                self.__insert(value, ptr.right_child)
+        # if less, check left
+        elif value < ptr.value:
+            # if left is None, insert
+            if ptr.left_child == None:
+                ptr.left_child = Node(value)
+            # else recursive call on left child
+            else:
+                self.__insert(value, ptr.left_child)
+        # else if equal, return
+        else:
+            #Do not insert duplicate elements
+            return
+    # end __insert()
+
     def search(self, value):
-        #if empty, return
+        # if empty, return False
         if self.is_empty():
             return False
-        #point at root
-        ptr = self.root
-        #go thru tree
-        while ptr != None:
-            # if value == current value
+        # else recursive call on root
+        else:
+            return self.__search(value, self.root)
+    # end search()
+
+    def __search(self, value, ptr):
+        """Helper search function, recursive."""
+        if ptr == None:
+            return False
+        else:
             if value == ptr.value:
                 return True
-            # elif value is greater than
             elif value > ptr.value:
-                # enter right sub tree
-                ptr = ptr.right_child
-            # elif value is less than
-            elif value < ptr.value:
-                # enter left sub tree
-                ptr = ptr.left_child
-        #if exit while loop, value not found
-        return False
-    # end search()
+                return self.__search(value, ptr.right_child)
+            else:
+                return self.__search(value, ptr.left_child)
+    # end __search()
 
     def print_(self, traversal='inorder'):
         # if empty
@@ -147,4 +147,8 @@ print 'print inorder'
 tree.print_()
 print ""
 
-print tree.search(int(raw_input('search for a number: ')))
+for i in range(21):
+    if tree.search(i):
+        print i, '*'
+    else:
+        print i
